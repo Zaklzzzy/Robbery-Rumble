@@ -8,21 +8,18 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Rigidbody _rb;
 
     //New Input System
     private GameInput _gameInput;
     //private IControllable _controllable;
 
     //Rotate And Movement
-    private Rigidbody _rb;
+    
     //RaycastHit _hit;
 
     private void Awake()
     {
-        _rb = GetComponentInChildren<Rigidbody>();
-
-        _animator = GetComponentInChildren<Animator>();
-
         _gameInput = new GameInput();
         _gameInput.Enable();
 
