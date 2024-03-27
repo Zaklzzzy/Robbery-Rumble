@@ -1,14 +1,11 @@
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Rigidbody _rb;
+    private Rigidbody _rb;
 
     //New Input System
     private GameInput _gameInput;
@@ -20,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _rb = GetComponent<Rigidbody>();
+
         _gameInput = new GameInput();
         _gameInput.Enable();
 

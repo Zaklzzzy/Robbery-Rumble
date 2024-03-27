@@ -3,15 +3,18 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class IKControl : MonoBehaviour
 {
-    private Animator _animator;
+    [Header("Weight Prefs")]
+    [SerializeField] private float _leftHandWeight = 1.0f;
+    [SerializeField] private float _rightHandWeight = 1.0f;
 
-    public bool ikActive = false;
-
+    [Header("Hand Objects (For Automaticly Use)")]
     public Transform HandObjLeft; //Left Hand Object
     public Transform HandObjRight; //Right Hand Object
 
-    public float leftHandWeight = 1.0f;
-    public float rightHandWeight = 1.0f;
+    [Header("IK Activator (For Automaticly Use)")]
+    public bool ikActive = false;
+
+    private Animator _animator;
 
     private void Start()
     {
@@ -24,10 +27,10 @@ public class IKControl : MonoBehaviour
         {
             if (HandObjLeft != null && HandObjRight != null)
             {
-                _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, rightHandWeight);
+                _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, _rightHandWeight);
                 _animator.SetIKPosition(AvatarIKGoal.RightHand, HandObjRight.position);
 
-                _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftHandWeight);
+                _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, _leftHandWeight);
                 _animator.SetIKPosition(AvatarIKGoal.LeftHand, HandObjLeft.position);
             }
         }

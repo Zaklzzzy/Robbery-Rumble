@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 58037861}
   m_Layer: 0
-  m_Name: JointHolder
+  m_Name: Hand Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -691,7 +691,6 @@ GameObject:
   - component: {fileID: 1072013871}
   - component: {fileID: 1072013870}
   - component: {fileID: 1072013869}
-  - component: {fileID: 1072013872}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -740,7 +739,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _animator: {fileID: 3358705720079111344}
-  _rb: {fileID: 1072013869}
 --- !u!4 &1072013871
 Transform:
   m_ObjectHideFlags: 0
@@ -757,22 +755,6 @@ Transform:
   - {fileID: 8682000936020643530}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!138 &1072013872
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072013868}
-  serializedVersion: 1
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &1171458194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,11 +2597,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4006a753ee284e742a96859663e0246f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ikActive: 0
+  _leftHandWeight: 1
+  _rightHandWeight: 1
   HandObjLeft: {fileID: 0}
   HandObjRight: {fileID: 0}
-  leftHandWeight: 1
-  rightHandWeight: 1
+  ikActive: 0
 --- !u!114 &8682000936020643533
 MonoBehaviour:
   m_ObjectHideFlags: 0

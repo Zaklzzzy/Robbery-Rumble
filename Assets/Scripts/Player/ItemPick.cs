@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ItemPick : MonoBehaviour
 {
-    private Transform currentObjLeft; //Left Object Point
-    private Transform currentObjRight; //Right Object Point
+    [SerializeField] private GameObject _jointHolder;
+    
+    //Dragable Object
+    private GameObject _currentObject;
+    private Transform _currentObjLeft; //Left Object Point
+    private Transform _currentObjRight; //Right Object Point
 
+    //Connect Point
+    private FixedJoint _joint;
+
+    //For IK Animation
     private IKControl _ikcontrol;
 
+    //Boolean For Grab And Put
     private bool _isHandEmpty = true;
-
-    [SerializeField] private GameObject _jointHolder;
-
-    [SerializeField] private FixedJoint _joint;
-
-    [SerializeField] private GameObject _currentObject;
 
     private void Start()
     {
@@ -46,19 +46,19 @@ public class ItemPick : MonoBehaviour
                 _joint = _jointHolder.AddComponent<FixedJoint>();
                 _joint.connectedBody = _currentObject.GetComponent<Rigidbody>();
 
-                currentObjLeft = _currentObject.GetComponent<Dragable>().PointLeft;
-                currentObjRight = _currentObject.GetComponent<Dragable>().PointRight;
+                _currentObjLeft = _currentObject.GetComponent<Dragable>().PointLeft;
+                _currentObjRight = _currentObject.GetComponent<Dragable>().PointRight;
 
-                gameObject.GetComponent<IKControl>().HandObjLeft = currentObjLeft;
-                gameObject.GetComponent<IKControl>().HandObjRight = currentObjRight;
+                gameObject.GetComponent<IKControl>().HandObjLeft = _currentObjLeft;
+                gameObject.GetComponent<IKControl>().HandObjRight = _currentObjRight;
             }
             else if(!_isHandEmpty && _currentObject)
             {
                 Debug.Log("Put");
                 _isHandEmpty = true;
 
-                currentObjLeft = null;
-                currentObjRight = null;
+                _currentObjLeft = null;
+                _currentObjRight = null;
 
                 Destroy(_jointHolder.GetComponent<FixedJoint>());
 
