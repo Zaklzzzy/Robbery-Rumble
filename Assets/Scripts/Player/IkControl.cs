@@ -5,9 +5,10 @@ public class IKControl : MonoBehaviour
 {
     private Animator _animator;
 
-    bool ikActive = false;
+    public bool ikActive = false;
 
-    public Transform HandObj = null;
+    public Transform HandObjLeft;
+    public Transform HandObjRight;
 
     public float leftHandWeight = 1.0f;
     public float rightHandWeight = 1.0f;
@@ -17,22 +18,22 @@ public class IKControl : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnAnimatorIK()
+    public void OnAnimatorIK(int layerIndex)
     {
         if (ikActive)
         {
-            if (HandObj != null)
+            if (HandObjLeft != null && HandObjRight != null)
             {
                 _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, rightHandWeight);
-                _animator.SetIKPosition(AvatarIKGoal.RightHand, HandObj.position);
+                _animator.SetIKPosition(AvatarIKGoal.RightHand, HandObjRight.position);
 
                 _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftHandWeight);
-                _animator.SetIKPosition(AvatarIKGoal.LeftHand, HandObj.position);
+                _animator.SetIKPosition(AvatarIKGoal.LeftHand, HandObjLeft.position);
             }
         }
         else
         {
-            _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);    
+            _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
             _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
 
             _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
@@ -40,4 +41,10 @@ public class IKControl : MonoBehaviour
         }
         
     }
+
+    public void SetIKActive(bool active)
+    {
+        ikActive = active;
+    }
+
 }
