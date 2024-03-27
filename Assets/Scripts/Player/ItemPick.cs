@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,24 +29,21 @@ public class ItemPick : MonoBehaviour
         if (other.gameObject.CompareTag("Dragable"))
         {
             _currentObject = other.gameObject;
-            _joint.connectedBody = other.GetComponent<Rigidbody>();
-
-            currentObjLeft = other.gameObject.GetComponent<Dragable>().PointLeft;
-            currentObjRight = other.gameObject.GetComponent<Dragable>().PointRight;
         }
     }
 
     public void GrabOrPut(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
         { 
-            if (_isHandEmpty)
+            if (_isHandEmpty && _currentObject != null)
             {
                 Debug.Log("Grab");
                 _isHandEmpty = false;
 
                 _ikcontrol.SetIKActive(true);
 
+                _joint = _jointHolder.AddComponent<FixedJoint>();
                 _joint.connectedBody = _currentObject.GetComponent<Rigidbody>();
 
                 currentObjLeft = _currentObject.GetComponent<Dragable>().PointLeft;
@@ -54,7 +52,7 @@ public class ItemPick : MonoBehaviour
                 gameObject.GetComponent<IKControl>().HandObjLeft = currentObjLeft;
                 gameObject.GetComponent<IKControl>().HandObjRight = currentObjRight;
             }
-            else
+            else if(!_isHandEmpty && _currentObject)
             {
                 Debug.Log("Put");
                 _isHandEmpty = true;
@@ -68,6 +66,10 @@ public class ItemPick : MonoBehaviour
 
                 gameObject.GetComponent<IKControl>().HandObjLeft = null;
                 gameObject.GetComponent<IKControl>().HandObjRight = null;
+            }
+            else
+            {
+                Debug.Log("Empty");
             }
         }
     }
