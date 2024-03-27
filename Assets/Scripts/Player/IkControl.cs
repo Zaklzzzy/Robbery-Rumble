@@ -7,8 +7,8 @@ public class IKControl : MonoBehaviour
 
     public bool ikActive = false;
 
-    public Transform HandObjLeft;
-    public Transform HandObjRight;
+    public Transform HandObjLeft; //Left Hand Object
+    public Transform HandObjRight; //Right Hand Object
 
     public float leftHandWeight = 1.0f;
     public float rightHandWeight = 1.0f;
@@ -18,7 +18,7 @@ public class IKControl : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void OnAnimatorIK(int layerIndex)
+    private void OnAnimatorIK()
     {
         if (ikActive)
         {

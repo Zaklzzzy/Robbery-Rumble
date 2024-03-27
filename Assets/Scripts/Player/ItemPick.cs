@@ -1,46 +1,82 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ItemPick : MonoBehaviour
 {
-    private Animator _animator;
-    private Transform currentInteractionObjLeft;
-    private Transform currentInteractionObjRight;
+    private Transform currentObjLeft; //Left Object Point
+    private Transform currentObjRight; //Right Object Point
 
-    [SerializeField] private IKControl _ikcontrol;
+    private IKControl _ikcontrol;
+
+    private bool _isHandEmpty = true;
+
+    [SerializeField] private GameObject _jointHolder;
+
+    [SerializeField] private FixedJoint _joint;
+
+    [SerializeField] private GameObject _currentObject;
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
+        _ikcontrol = GetComponent<IKControl>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Dragable"))
         {
-            _ikcontrol.SetIKActive(true);
+            _currentObject = other.gameObject;
+            _joint.connectedBody = other.GetComponent<Rigidbody>();
 
-            currentInteractionObjLeft = other.gameObject.GetComponent<Dragable>().PointLeft;
-            currentInteractionObjRight = other.gameObject.GetComponent<Dragable>().PointRight;
+            currentObjLeft = other.gameObject.GetComponent<Dragable>().PointLeft;
+            currentObjRight = other.gameObject.GetComponent<Dragable>().PointRight;
+        }
+    }
 
-            gameObject.GetComponent<IKControl>().HandObjLeft = currentInteractionObjLeft;
-            gameObject.GetComponent<IKControl>().HandObjRight = currentInteractionObjRight;
+    public void GrabOrPut(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        { 
+            if (_isHandEmpty)
+            {
+                Debug.Log("Grab");
+                _isHandEmpty = false;
+
+                _ikcontrol.SetIKActive(true);
+
+                _joint.connectedBody = _currentObject.GetComponent<Rigidbody>();
+
+                currentObjLeft = _currentObject.GetComponent<Dragable>().PointLeft;
+                currentObjRight = _currentObject.GetComponent<Dragable>().PointRight;
+
+                gameObject.GetComponent<IKControl>().HandObjLeft = currentObjLeft;
+                gameObject.GetComponent<IKControl>().HandObjRight = currentObjRight;
+            }
+            else
+            {
+                Debug.Log("Put");
+                _isHandEmpty = true;
+
+                currentObjLeft = null;
+                currentObjRight = null;
+
+                Destroy(_jointHolder.GetComponent<FixedJoint>());
+
+                _ikcontrol.SetIKActive(false);
+
+                gameObject.GetComponent<IKControl>().HandObjLeft = null;
+                gameObject.GetComponent<IKControl>().HandObjRight = null;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //if (other.gameObject.CompareTag("Dragable") && other.gameObject.GetComponent<Dragable>().interactionPointLeft == currentInteractionObj)
         if (other.gameObject.CompareTag("Dragable"))
         {
-            currentInteractionObjLeft = null;
-            currentInteractionObjRight = null;
-
-            _ikcontrol.SetIKActive(false);
-
-            gameObject.GetComponent<IKControl>().HandObjLeft = currentInteractionObjLeft;
-            gameObject.GetComponent<IKControl>().HandObjRight = currentInteractionObjRight;
+            _currentObject = null;
         }
     }
 }

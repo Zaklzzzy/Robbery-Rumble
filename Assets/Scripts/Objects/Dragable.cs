@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Dragable : MonoBehaviour
 {
-    public Transform PointLeft;
-    public Transform PointRight;
+    public Transform PointLeft; //Left Connect Point
+    public Transform PointRight; //Right Connect Point
 
     private void OnDrawGizmosSelected()
     {
