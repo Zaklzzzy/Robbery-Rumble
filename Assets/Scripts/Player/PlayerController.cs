@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Get Key
         var inputDirection = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
 
         float x = inputDirection.x;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = new Vector3(inputDirection.x, 0, inputDirection.y).normalized;
 
+        //Rotate
         if (move != Vector3.zero)
         {
             Quaternion newRotation = Quaternion.LookRotation(move);
@@ -42,14 +44,10 @@ public class PlayerController : MonoBehaviour
             _rb.rotation = Quaternion.Slerp(_rb.rotation, newRotation, _moveSpeed * Time.deltaTime);
         }
 
-        /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        Physics.Raycast(ray, out _hit);
-        Vector3 targetPosition = new Vector3(_hit.point.x, transform.position.y, _hit.point.z + 2.3f);
-        transform.LookAt(targetPosition);*/
-
+        //Movement
         _rb.MovePosition(_rb.position + move * _moveSpeed * Time.deltaTime);
 
+        //Animation
         _animator.SetFloat("Horizontal", x);
         _animator.SetFloat("Vertical", z);
     }
