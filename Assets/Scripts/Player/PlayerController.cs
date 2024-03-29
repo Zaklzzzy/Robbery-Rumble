@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
 
     [Header("Jump")]
-    [SerializeField] private float _jumpPower = 75f;
+    [SerializeField] private float _jumpPower;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _groundCheckDistance = 0.2f;
@@ -155,7 +155,6 @@ public class PlayerController : MonoBehaviour
 
         if (!_isGrounded && _rb.velocity.y < 0)
         {
-            // ѕримен€ем дополнительную гравитацию
             Vector3 extraGravityForce = (Physics.gravity * _gravityMultiplier) - Physics.gravity;
             _rb.AddForce(extraGravityForce);
         }
