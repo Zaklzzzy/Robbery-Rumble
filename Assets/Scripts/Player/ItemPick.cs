@@ -1,9 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class ItemPick : MonoBehaviour
 {
     [SerializeField] private GameObject _jointHolder;
+    [SerializeField] private GameObject _grabUI;
+    [SerializeField] private GameObject _putUI;
     
     //Dragable Object
     private GameObject _currentObject;
@@ -29,6 +33,16 @@ public class ItemPick : MonoBehaviour
         if (other.gameObject.CompareTag("Dragable"))
         {
             _currentObject = other.gameObject;
+            if (_isHandEmpty)
+            {
+                _grabUI.SetActive(true);
+                _putUI.SetActive(false);
+            }
+            else if (!_isHandEmpty)
+            {
+                _grabUI.SetActive(false);
+                _putUI.SetActive(true);
+            }
         }
     }
 
@@ -39,6 +53,9 @@ public class ItemPick : MonoBehaviour
             if (_isHandEmpty && _currentObject != null)
             {
                 Debug.Log("Grab");
+                _putUI.SetActive(true);
+                _grabUI.SetActive(false);
+
                 _isHandEmpty = false;
 
                 _ikcontrol.SetIKActive(true);
@@ -55,6 +72,8 @@ public class ItemPick : MonoBehaviour
             else if(!_isHandEmpty && _currentObject)
             {
                 Debug.Log("Put");
+                _putUI.SetActive(false);
+
                 _isHandEmpty = true;
 
                 _currentObjLeft = null;
@@ -79,6 +98,8 @@ public class ItemPick : MonoBehaviour
         if (other.gameObject.CompareTag("Dragable"))
         {
             _currentObject = null;
+            _grabUI.SetActive(false);
+            _putUI.SetActive(false);
         }
     }
 }
