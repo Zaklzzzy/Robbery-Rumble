@@ -53,6 +53,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Show Goals"",
+                    ""type"": ""Button"",
+                    ""id"": ""e90837a8-319f-47fe-9868-3675b6f577f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -198,6 +207,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b0b6a5d-56bc-472a-8ec7-595d76bfcd78"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Show Goals"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -237,6 +257,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_GrabPut = m_Gameplay.FindAction("Grab/Put", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_ShowGoals = m_Gameplay.FindAction("Show Goals", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -304,6 +325,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_GrabPut;
     private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_ShowGoals;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -311,6 +333,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @GrabPut => m_Wrapper.m_Gameplay_GrabPut;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        public InputAction @ShowGoals => m_Wrapper.m_Gameplay_ShowGoals;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -329,6 +352,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @ShowGoals.started += instance.OnShowGoals;
+            @ShowGoals.performed += instance.OnShowGoals;
+            @ShowGoals.canceled += instance.OnShowGoals;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -342,6 +368,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @ShowGoals.started -= instance.OnShowGoals;
+            @ShowGoals.performed -= instance.OnShowGoals;
+            @ShowGoals.canceled -= instance.OnShowGoals;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -410,6 +439,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnGrabPut(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnShowGoals(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
