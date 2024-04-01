@@ -203,6 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 58037861}
+  - component: {fileID: 58037862}
   m_Layer: 0
   m_Name: Hand Point
   m_TagString: Untagged
@@ -225,6 +226,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8682000936020643530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &58037862
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58037860}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &106819855
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea769872a920be4eabd7189a0049467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiredHoldDuration: 0.5
+  IsHeld: 0
   PointLeft: {fileID: 1961990333}
   PointRight: {fileID: 12277713}
   required: 1
@@ -1044,7 +1074,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 0.3
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1164,6 +1194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea769872a920be4eabd7189a0049467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiredHoldDuration: 0.5
+  IsHeld: 0
   PointLeft: {fileID: 203055192}
   PointRight: {fileID: 1171458195}
   required: 1
@@ -1776,7 +1808,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076644231}
   serializedVersion: 4
-  m_Mass: 0.3
+  m_Mass: 85
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1807,6 +1839,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea769872a920be4eabd7189a0049467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiredHoldDuration: 0.5
+  IsHeld: 0
   PointLeft: {fileID: 1169563915}
   PointRight: {fileID: 796338752}
   required: 1
@@ -4374,8 +4408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4006a753ee284e742a96859663e0246f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftHandWeight: 1
-  _rightHandWeight: 1
+  _leftHandWeight: 300
+  _rightHandWeight: 300
   HandObjLeft: {fileID: 0}
   HandObjRight: {fileID: 0}
   ikActive: 0
@@ -4391,7 +4425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4974608e72e98f74088f7831a40d4832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jointHolder: {fileID: 1072013868}
+  _jointHolder: {fileID: 58037860}
   _grabUI: {fileID: 567156767}
   _putUI: {fileID: 1710934737}
 --- !u!65 &8682000936020643534
