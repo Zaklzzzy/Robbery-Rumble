@@ -45,9 +45,11 @@ public class IKControl : MonoBehaviour
         
     }
 
-    public void SetIKActive(bool active)
+    public void SetIKTargets(Transform leftHandTarget, Transform rightHandTarget, bool isActive)
     {
-        ikActive = active;
+        ikActive = isActive;
+        HandObjLeft = leftHandTarget;
+        HandObjRight = rightHandTarget;
     }
 
 }

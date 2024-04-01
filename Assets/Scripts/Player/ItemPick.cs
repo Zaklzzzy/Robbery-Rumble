@@ -1,3 +1,4 @@
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,7 +16,7 @@ public class ItemPick : MonoBehaviour
     private Transform _currentObjRight; //Right Object Point
 
     //Connect Point
-    private FixedJoint _joint;
+    private SpringJoint _joint;
 
     //For IK Animation
     private IKControl _ikcontrol;
@@ -33,64 +34,53 @@ public class ItemPick : MonoBehaviour
         if (other.gameObject.CompareTag("Dragable"))
         {
             _currentObject = other.gameObject;
-            if (_isHandEmpty)
-            {
-                _grabUI.SetActive(true);
-                _putUI.SetActive(false);
-            }
-            else if (!_isHandEmpty)
-            {
-                _grabUI.SetActive(false);
-                _putUI.SetActive(true);
-            }
+            _grabUI.SetActive(_isHandEmpty);
+            //_putUI.SetActive(!_isHandEmpty);
         }
     }
 
     public void GrabOrPut(InputAction.CallbackContext context)
     {
         if (context.started)
-        { 
-            if (_isHandEmpty && _currentObject != null)
+        {
+            _isHandEmpty = !_isHandEmpty;
+
+            if (!_isHandEmpty && _currentObject != null)
             {
                 Debug.Log("Grab");
-                _putUI.SetActive(true);
-                _grabUI.SetActive(false);
-
-                _isHandEmpty = false;
-
-                _ikcontrol.SetIKActive(true);
-
-                _joint = _jointHolder.AddComponent<FixedJoint>();
-                _joint.connectedBody = _currentObject.GetComponent<Rigidbody>();
-
-                _currentObjLeft = _currentObject.GetComponent<Dragable>().PointLeft;
-                _currentObjRight = _currentObject.GetComponent<Dragable>().PointRight;
-
-                gameObject.GetComponent<IKControl>().HandObjLeft = _currentObjLeft;
-                gameObject.GetComponent<IKControl>().HandObjRight = _currentObjRight;
-            }
-            else if(!_isHandEmpty && _currentObject)
-            {
-                Debug.Log("Put");
-                _putUI.SetActive(false);
-
-                _isHandEmpty = true;
-
-                _currentObjLeft = null;
-                _currentObjRight = null;
-
-                Destroy(_jointHolder.GetComponent<FixedJoint>());
-
-                _ikcontrol.SetIKActive(false);
-
-                gameObject.GetComponent<IKControl>().HandObjLeft = null;
-                gameObject.GetComponent<IKControl>().HandObjRight = null;
+                SetupJointAndIKPoints();
             }
             else
             {
-                Debug.Log("Empty");
+                Debug.Log(_currentObject ? "Put" : "Empty");
+                ReleaseObject();
             }
+
+            _grabUI.SetActive(!_isHandEmpty);
+            _putUI.SetActive(_isHandEmpty);
         }
+    }
+
+    private void SetupJointAndIKPoints()
+    {
+        _joint = _jointHolder.AddComponent<SpringJoint>();
+        _joint.connectedBody = _currentObject.GetComponent<Rigidbody>();
+
+        _joint.spring = 50;
+        _joint.damper = 5;
+        _joint.breakForce = float.PositiveInfinity;
+
+        var dragable = _currentObject.GetComponent<Dragable>();
+        _currentObjLeft = dragable.PointLeft;
+        _currentObjRight = dragable.PointRight;
+
+        _ikcontrol.SetIKTargets(_currentObjLeft, _currentObjRight, true);
+    }
+
+    private void ReleaseObject()
+    {
+        if (_joint) Destroy(_joint);
+        _ikcontrol.SetIKTargets(null, null, false);
     }
 
     private void OnTriggerExit(Collider other)
