@@ -1,13 +1,12 @@
-using TMPro;
+using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR;
 
-public class ItemPick : MonoBehaviour
+public class ItemPick : NetworkBehaviour
 {
     [SerializeField] private GameObject _jointHolder;
-    [SerializeField] private GameObject _grabUI;
-    [SerializeField] private GameObject _putUI;
+    //[SerializeField] private GameObject _grabUI;
+    //[SerializeField] private GameObject _putUI;
     
     //Dragable Object
     private GameObject _currentObject;
@@ -33,7 +32,7 @@ public class ItemPick : MonoBehaviour
         if (other.gameObject.CompareTag("Dragable"))
         {
             _currentObject = other.gameObject;
-            if (_isHandEmpty)
+            /*if (_isHandEmpty)
             {
                 _grabUI.SetActive(true);
                 _putUI.SetActive(false);
@@ -42,7 +41,7 @@ public class ItemPick : MonoBehaviour
             {
                 _grabUI.SetActive(false);
                 _putUI.SetActive(true);
-            }
+            }*/
         }
     }
 
@@ -53,8 +52,8 @@ public class ItemPick : MonoBehaviour
             if (_isHandEmpty && _currentObject != null)
             {
                 Debug.Log("Grab");
-                _putUI.SetActive(true);
-                _grabUI.SetActive(false);
+                //_putUI.SetActive(true);
+                //_grabUI.SetActive(false);
 
                 _isHandEmpty = false;
 
@@ -72,7 +71,7 @@ public class ItemPick : MonoBehaviour
             else if(!_isHandEmpty && _currentObject)
             {
                 Debug.Log("Put");
-                _putUI.SetActive(false);
+                //_putUI.SetActive(false);
 
                 _isHandEmpty = true;
 
@@ -98,8 +97,8 @@ public class ItemPick : MonoBehaviour
         if (other.gameObject.CompareTag("Dragable"))
         {
             _currentObject = null;
-            _grabUI.SetActive(false);
-            _putUI.SetActive(false);
+            //_grabUI.SetActive(false);
+            //_putUI.SetActive(false);
         }
     }
 }

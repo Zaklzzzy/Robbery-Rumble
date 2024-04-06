@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mirror;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(NetworkTransformReliable))]
+
+public class PlayerController : NetworkBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float _walkSpeed = 15f;
@@ -35,6 +38,14 @@ public class PlayerController : MonoBehaviour
         _gameInput.Enable();
 
         //_controllable = GetComponent<IControllable>();
+    }
+
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        playerInput.enabled = true;
     }
 
     private void Update()
