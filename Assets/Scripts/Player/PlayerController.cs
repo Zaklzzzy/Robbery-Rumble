@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(NetworkTransformReliable))]
-
 public class PlayerController : NetworkBehaviour
 {
     [Header("Movement")]
@@ -20,7 +19,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _groundCheckDistance = 0.2f;
     [SerializeField] private float _gravityMultiplier = 2.5f;
-    public bool _isGrounded = false;
+    private bool _isGrounded = false;
 
     //New Input System
     private GameInput _gameInput;
@@ -48,19 +47,34 @@ public class PlayerController : NetworkBehaviour
         playerInput.enabled = true;
     }
 
+    private void OnDisable()
+    {
+        _gameInput.Disable();
+    }
+
     private void Update()
     {
+        if (!isLocalPlayer) return;
+
         CheckGround();
     }
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer) return;
+
         //Input
         Vector2 inputDirection = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
 
         float x = inputDirection.x;
         float z = inputDirection.y;
 
+        Move(inputDirection, x, z);
+        Animate(x, z);
+    }
+
+    private void Move(Vector2 inputDirection, float x, float z)
+    {
         if (inputDirection != Vector2.zero)
         {
             //Rotate
@@ -83,19 +97,12 @@ public class PlayerController : NetworkBehaviour
             Vector3 extraGravityForce = (Physics.gravity * _gravityMultiplier) - Physics.gravity;
             _rb.AddForce(extraGravityForce);
         }
-
-        //Animate
+    }
+    
+    private void Animate(float x, float z)
+    {
         _animator.SetFloat("Horizontal", x);
         _animator.SetFloat("Vertical", z);
-    }
-
-    public void Jump(InputAction.CallbackContext context)
-    {
-        if (_isGrounded && context.performed)
-        {
-            _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
-            _isGrounded = false;
-        }
     }
 
     private void CheckGround()
@@ -105,4 +112,22 @@ public class PlayerController : NetworkBehaviour
         //Debug.DrawRay(origin, Vector3.down * groundCheckDistance, Color.red);
     }
 
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed && isLocalPlayer)
+        {
+            CmdJump();
+        }
+    }
+
+    //Mirror Scripts
+    [Command]
+    public void CmdJump()
+    {
+        if (_isGrounded)
+        {
+            _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
+            _isGrounded = false;
+        }
+    }
 }

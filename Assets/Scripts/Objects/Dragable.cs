@@ -2,7 +2,7 @@ using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Dragable : MonoBehaviour
+public class Dragable : NetworkBehaviour
 {
     [Header("Grab Points")]
     public Transform PointLeft; //Left Connect Point

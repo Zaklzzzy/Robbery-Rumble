@@ -47,47 +47,17 @@ public class ItemPick : NetworkBehaviour
 
     public void GrabOrPut(InputAction.CallbackContext context)
     {
+        if (!isLocalPlayer) return;
+
         if (context.started)
-        { 
+        {
             if (_isHandEmpty && _currentObject != null)
             {
-                Debug.Log("Grab");
-                //_putUI.SetActive(true);
-                //_grabUI.SetActive(false);
-
-                _isHandEmpty = false;
-
-                _ikcontrol.SetIKActive(true);
-
-                _joint = _jointHolder.AddComponent<FixedJoint>();
-                _joint.connectedBody = _currentObject.GetComponent<Rigidbody>();
-
-                _currentObjLeft = _currentObject.GetComponent<Dragable>().PointLeft;
-                _currentObjRight = _currentObject.GetComponent<Dragable>().PointRight;
-
-                gameObject.GetComponent<IKControl>().HandObjLeft = _currentObjLeft;
-                gameObject.GetComponent<IKControl>().HandObjRight = _currentObjRight;
+                CmdGrabObject(_currentObject);
             }
-            else if(!_isHandEmpty && _currentObject)
+            else if (!_isHandEmpty && _currentObject)
             {
-                Debug.Log("Put");
-                //_putUI.SetActive(false);
-
-                _isHandEmpty = true;
-
-                _currentObjLeft = null;
-                _currentObjRight = null;
-
-                Destroy(_jointHolder.GetComponent<FixedJoint>());
-
-                _ikcontrol.SetIKActive(false);
-
-                gameObject.GetComponent<IKControl>().HandObjLeft = null;
-                gameObject.GetComponent<IKControl>().HandObjRight = null;
-            }
-            else
-            {
-                Debug.Log("Empty");
+                CmdReleaseObject();
             }
         }
     }
@@ -99,6 +69,67 @@ public class ItemPick : NetworkBehaviour
             _currentObject = null;
             //_grabUI.SetActive(false);
             //_putUI.SetActive(false);
+        }
+    }
+
+    private void SetIKControl(bool switcher)
+    {
+        if(switcher)
+        {
+            _currentObjLeft = _currentObject.GetComponent<Dragable>().PointLeft;
+            _currentObjRight = _currentObject.GetComponent<Dragable>().PointRight;
+        }
+        else
+        {
+            _currentObjLeft = null;
+            _currentObjRight = null;
+        }
+        _ikcontrol.SetIKActive(switcher);
+        gameObject.GetComponent<IKControl>().HandObjLeft = _currentObjLeft;
+        gameObject.GetComponent<IKControl>().HandObjRight = _currentObjRight;
+    }
+
+    //Mirror Scripts
+    [Command]
+    private void CmdGrabObject(GameObject objectToGrab)
+    {
+        RpcGrabObject(objectToGrab);
+    }
+
+    [Command]
+    private void CmdReleaseObject()
+    {
+        RpcReleaseObject();
+    }
+
+    [ClientRpc]
+    private void RpcGrabObject(GameObject objectToGrab)
+    {
+        if (_isHandEmpty)
+        {
+            Debug.Log("Grab " + netId);
+            _isHandEmpty = false;
+            SetIKControl(true);
+
+            _currentObject = objectToGrab;
+            _joint = _jointHolder.AddComponent<FixedJoint>();
+            _joint.connectedBody = objectToGrab.GetComponent<Rigidbody>();
+        }
+    }
+
+    [ClientRpc]
+    private void RpcReleaseObject()
+    {
+        if (!_isHandEmpty)
+        {
+            Debug.Log("Put " + netId);
+            _isHandEmpty = true;
+            SetIKControl(false);
+
+            if (_joint != null)
+            {
+                Destroy(_joint);
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
+using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class IKControl : MonoBehaviour
+[RequireComponent(typeof(NetworkAnimator))]
+public class IKControl : NetworkBehaviour
 {
     [Header("Weight Prefs")]
     [SerializeField] private float _leftHandWeight = 1.0f;
