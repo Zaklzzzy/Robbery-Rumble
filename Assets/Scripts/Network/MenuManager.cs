@@ -84,4 +84,17 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        if (NetworkServer.active)
+        {
+            manager.StopServer();
+        }
+
+        if (NetworkClient.isConnected)
+        {
+            manager.StopClient();
+        }
+    }
 }
