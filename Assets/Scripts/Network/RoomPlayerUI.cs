@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomPlayerUI : NetworkBehaviour
 {
     //public TMP_Text playerNameText;
-    //public TMP_Text playerReadyText;
+    //public TMP_Text playerReadyText;  
 
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName;
