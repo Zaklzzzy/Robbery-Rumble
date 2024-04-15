@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private GameObject menuUI;
+    [SerializeField] private GameObject settingUI;
+
     NetworkManager manager;
 
     private void Awake()
@@ -67,13 +70,13 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    // Вызовите этот метод, чтобы изменить адрес сервера
+    // Изменение адреса сервера
     public void SetServerAddress(string address)
     {
         manager.networkAddress = address;
     }
 
-    // Опционально: вызовите этот метод для изменения порта, если используете PortTransport
+    // Опционально: метод для изменения порта, если используется PortTransport
     public void SetServerPort(string portString)
     {
         if (ushort.TryParse(portString, out ushort port))
@@ -84,7 +87,15 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
+    
+    // Открытие настроек
+    public void SettingUI(bool switcher)
+    {
+        settingUI.SetActive(switcher);
+        menuUI.SetActive(!switcher);
+    }
 
+    // Остановка сервера при выходе
     private void OnDestroy()
     {
         if (NetworkServer.active)
