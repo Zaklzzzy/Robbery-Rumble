@@ -1326,8 +1326,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1118559040}
-        m_TargetAssemblyTypeName: ColorUI, Assembly-CSharp
+      - m_Target: {fileID: 861255230}
+        m_TargetAssemblyTypeName: ColorManager, Assembly-CSharp
         m_MethodName: UIActive
         m_Mode: 6
         m_Arguments:
@@ -2746,8 +2746,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1118559040}
-        m_TargetAssemblyTypeName: ColorUI, Assembly-CSharp
+      - m_Target: {fileID: 861255230}
+        m_TargetAssemblyTypeName: ColorManager, Assembly-CSharp
         m_MethodName: UIActive
         m_Mode: 6
         m_Arguments:
@@ -5777,8 +5777,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1118559040}
-        m_TargetAssemblyTypeName: ColorUI, Assembly-CSharp
+      - m_Target: {fileID: 716631438}
+        m_TargetAssemblyTypeName: ColorManager, Assembly-CSharp
         m_MethodName: UIActive
         m_Mode: 6
         m_Arguments:
@@ -6768,8 +6768,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1118559040}
-        m_TargetAssemblyTypeName: ColorUI, Assembly-CSharp
+      - m_Target: {fileID: 716631438}
+        m_TargetAssemblyTypeName: ColorManager, Assembly-CSharp
         m_MethodName: UIActive
         m_Mode: 6
         m_Arguments:
@@ -10004,8 +10004,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1118559040}
-        m_TargetAssemblyTypeName: ColorUI, Assembly-CSharp
+      - m_Target: {fileID: 1945154530}
+        m_TargetAssemblyTypeName: ColorManager, Assembly-CSharp
         m_MethodName: UIActive
         m_Mode: 6
         m_Arguments:
@@ -10233,8 +10233,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1118559040}
-        m_TargetAssemblyTypeName: ColorUI, Assembly-CSharp
+      - m_Target: {fileID: 1945154530}
+        m_TargetAssemblyTypeName: ColorManager, Assembly-CSharp
         m_MethodName: UIActive
         m_Mode: 6
         m_Arguments:
