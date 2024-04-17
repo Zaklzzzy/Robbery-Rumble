@@ -17,19 +17,24 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
     [SerializeField] private GameObject _pointer;
     private Texture2D _colorTexture;
 
+    [Header("Color Sync")]
+    [SerializeField] private LobbyManager _lobbyManager;
+    [SerializeField] private int _slotIndex;
+
     private void Start()
     {
         _colorTexture = GenerateColorTexture(256, 256);
         _paletteImage.texture = _colorTexture;
+        _playerMaterial.color = Color.white;
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        SelectColor(eventData);
+        if (_panel.activeSelf) SelectColor(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        SelectColor(eventData);
+        if(_panel.activeSelf) SelectColor(eventData);
     }
 
     private void SelectColor(PointerEventData eventData)

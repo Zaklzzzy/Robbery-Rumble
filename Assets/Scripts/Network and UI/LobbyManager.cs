@@ -1,13 +1,12 @@
 using Mirror;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LobbyManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] _players;
     [SerializeField] private GameObject[] _UI;
-    [SerializeField] private NetworkRoomManager _roomManager;
+    public NetworkRoomManager _roomManager;
 
     private void Awake()
     {

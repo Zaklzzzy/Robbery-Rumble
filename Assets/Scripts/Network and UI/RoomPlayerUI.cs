@@ -13,6 +13,9 @@ public class RoomPlayerUI : NetworkBehaviour
     [SyncVar(hook = nameof(OnReadyStatusChanged))]
     public bool isReady;
 
+/*    [SyncVar(hook = nameof(OnReadyStatusChanged))]
+    public byte color;*/
+
     private void OnNameChanged(string _Old, string _New)
     {
         //playerNameText.text = playerName;
@@ -22,6 +25,11 @@ public class RoomPlayerUI : NetworkBehaviour
     {
         //playerReadyText.text = isReady ? "Ready" : "Not Ready";
     }
+
+/*    private void OnColor(byte _Old, byte _New)
+    {
+        //playerReadyText.text = isReady ? "Ready" : "Not Ready";
+    }*/
 
     [Command]
     public void CmdSetReady()
