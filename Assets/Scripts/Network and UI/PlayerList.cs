@@ -13,8 +13,15 @@ public class PlayerList : MonoBehaviour
         for (int i = 0; i < _roomManager.roomSlots.Count; i++)
         {
             _players[i].SetActive(true);
-            //_players[i].GetComponentInChildren<TextMeshProUGUI>().color = _roomManager.roomSlots[i].GetComponent<RoomPlayerUI>().color;
+            //_players[i].GetComponentInChildren<TextMeshProUGUI>().color = ParseColor(_roomManager.roomSlots[i].GetComponent<RoomPlayerUI>().color);
             _players[i].GetComponentInChildren<TextMeshProUGUI>().text = _roomManager.roomSlots[i].GetComponent<RoomPlayerUI>().playerName;
         }
+    }
+
+    private Color ParseColor(string color)
+    {
+        if(ColorUtility.TryParseHtmlString(color, out Color outputColor)) return outputColor;
+        Debug.Log("Error to Parse Color");
+        return Color.white;
     }
 }

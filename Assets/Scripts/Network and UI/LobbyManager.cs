@@ -1,4 +1,6 @@
 using Mirror;
+using System;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 
@@ -20,6 +22,14 @@ public class LobbyManager : MonoBehaviour
             _players[i].SetActive(true);
             _UI[i].SetActive(true);
             _UI[i].GetComponentInChildren<TextMeshProUGUI>().text = _roomManager.roomSlots[i].GetComponent<RoomPlayerUI>().playerName;
+            if(_roomManager.roomSlots[i].GetComponent<NetworkRoomPlayer>().readyToBegin)
+            {
+                _UI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+            }
+            else
+            {
+                _UI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            }
         }
     }
 

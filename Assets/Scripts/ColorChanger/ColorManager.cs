@@ -53,6 +53,7 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
             Color selectedColor = _colorTexture.GetPixel(texX, texY);
             _buttonImage.color = selectedColor;
             _playerMaterial.color = selectedColor;
+            SyncColorChange(selectedColor);
         }
     }
 
@@ -81,5 +82,10 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
     public void UIActive(bool switcher)
     {
         _panel.SetActive(switcher);
+    }
+
+    private void SyncColorChange(Color newColor)
+    {
+        _lobbyManager._roomManager.roomSlots[_slotIndex].GetComponent<RoomPlayerUI>().CmdSetColor(ColorUtility.ToHtmlStringRGB(newColor));
     }
 }

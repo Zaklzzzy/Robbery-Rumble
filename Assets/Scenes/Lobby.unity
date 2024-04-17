@@ -3814,8 +3814,10 @@ MonoBehaviour:
   _playerMaterial: {fileID: 2100000, guid: 6c720274faea80f46bd0a7dc0df8b335, type: 2}
   _paletteImage: {fileID: 1783498438}
   _pointer: {fileID: 1472953143}
-  _lobbyManager: {fileID: 0}
-  _slotIndex: 0
+  _lobbyManager: {fileID: 1475465715}
+  _slotIndex: 1
+  _readyButton: {fileID: 13289894}
+  _colorButton: {fileID: 1136113320}
 --- !u!1 &717597598
 GameObject:
   m_ObjectHideFlags: 0
@@ -4432,8 +4434,10 @@ MonoBehaviour:
   _playerMaterial: {fileID: 2100000, guid: b6f81ef11e08f1d4bb916272886bae72, type: 2}
   _paletteImage: {fileID: 371033482}
   _pointer: {fileID: 359915480}
-  _lobbyManager: {fileID: 0}
-  _slotIndex: 0
+  _lobbyManager: {fileID: 1475465715}
+  _slotIndex: 2
+  _readyButton: {fileID: 584621696}
+  _colorButton: {fileID: 167079732}
 --- !u!1 &875692523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5642,8 +5646,10 @@ MonoBehaviour:
   _playerMaterial: {fileID: 2100000, guid: c1abb845085ac6f459fb54c744c9cbe7, type: 2}
   _paletteImage: {fileID: 318717869}
   _pointer: {fileID: 1148958370}
-  _lobbyManager: {fileID: 0}
+  _lobbyManager: {fileID: 1475465715}
   _slotIndex: 0
+  _readyButton: {fileID: 594320399}
+  _colorButton: {fileID: 1510930097}
 --- !u!1 &1122822641
 GameObject:
   m_ObjectHideFlags: 0
@@ -10450,8 +10456,10 @@ MonoBehaviour:
   _playerMaterial: {fileID: 2100000, guid: 114b9604c04eb674b8ee890293523b5f, type: 2}
   _paletteImage: {fileID: 1007712853}
   _pointer: {fileID: 1609966211}
-  _lobbyManager: {fileID: 0}
-  _slotIndex: 0
+  _lobbyManager: {fileID: 1475465715}
+  _slotIndex: 3
+  _readyButton: {fileID: 132437904}
+  _colorButton: {fileID: 1949253950}
 --- !u!1 &1949253948
 GameObject:
   m_ObjectHideFlags: 0
