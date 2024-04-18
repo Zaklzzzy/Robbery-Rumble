@@ -14,7 +14,7 @@ public class ItemPick : NetworkBehaviour
     private Transform _currentObjRight; //Right Object Point
 
     //Connect Point
-    private FixedJoint _joint;
+    private Rigidbody _rb;
 
     //For IK Animation
     private IKControl _ikcontrol;
@@ -64,7 +64,7 @@ public class ItemPick : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Dragable"))
+        if (other.gameObject.CompareTag("Dragable") && _isHandEmpty)
         {
             _currentObject = null;
             //_grabUI.SetActive(false);
@@ -112,8 +112,13 @@ public class ItemPick : NetworkBehaviour
             SetIKControl(true);
 
             _currentObject = objectToGrab;
-            _joint = _jointHolder.AddComponent<FixedJoint>();
-            _joint.connectedBody = objectToGrab.GetComponent<Rigidbody>();
+
+            _currentObject.transform.parent = _jointHolder.transform;
+            _currentObject.transform.position = _jointHolder.transform.position;
+            _currentObject.transform.rotation = _jointHolder.transform.rotation;
+
+            _rb = _currentObject.GetComponent<Rigidbody>();
+            Destroy(_rb);
         }
     }
 
@@ -126,10 +131,8 @@ public class ItemPick : NetworkBehaviour
             _isHandEmpty = true;
             SetIKControl(false);
 
-            if (_joint != null)
-            {
-                Destroy(_joint);
-            }
+            _currentObject.transform.parent = null;
+            _rb = _currentObject.AddComponent<Rigidbody>();
         }
     }
 }

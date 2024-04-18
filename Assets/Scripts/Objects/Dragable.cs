@@ -1,7 +1,9 @@
 using Mirror;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(NetworkIdentity))]
+[RequireComponent(typeof(NetworkTransformUnreliable))]
 public class Dragable : NetworkBehaviour
 {
     [Header("Grab Points")]

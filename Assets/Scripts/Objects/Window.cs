@@ -1,34 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class Window : MonoBehaviour
+public class Window : NetworkBehaviour
 {
     [SerializeField] private GameObject windowPart;
     [SerializeField] private float breakForce = 5f;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > breakForce)
+        if (isServer && collision.relativeVelocity.magnitude > breakForce)
         {
-            BreakWindow();
+            RpcBreakWindow(transform.position, transform.rotation);
         }
     }
 
-    private void BreakWindow()
+    [ClientRpc]
+    private void RpcBreakWindow(Vector3 position, Quaternion rotation)
     {
-        GameObject brokenGlass = Instantiate(windowPart, transform.position, transform.rotation);
+        GameObject brokenGlass = Instantiate(windowPart, position, rotation);
 
+        //Spawn glass parts on all clients
+        NetworkServer.Spawn(brokenGlass);
+
+        //Add force for every parts
         foreach (Transform fragment in brokenGlass.transform)
         {
             Rigidbody rb = fragment.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Vector3 forceDirection = (fragment.position - transform.position).normalized + Vector3.up * 0.5f;
+                Vector3 forceDirection = (fragment.position - position).normalized + Vector3.up * 0.5f;
                 forceDirection.Normalize();
                 rb.AddForce(forceDirection * Random.Range(2f, 5f), ForceMode.Impulse);
             }
         }
-        Destroy(gameObject);
+        
+        //Broke glass on all clients
+        NetworkServer.Destroy(gameObject);
     }
 }
