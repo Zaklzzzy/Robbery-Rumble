@@ -15,6 +15,7 @@ public class LobbyManager : MonoBehaviour
         _roomManager = FindAnyObjectByType<NetworkRoomManager>();
     }
 
+    //Change to NonUpdateFunction
     private void Update()
     {
         for (int i = 0; i < _roomManager.roomSlots.Count; i++)

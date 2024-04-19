@@ -3315,11 +3315,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d6a5f5d12c39a4aa853f50ff57fb84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _players:
+  _playersUI:
   - {fileID: 303434923}
   - {fileID: 1511594420}
   - {fileID: 1297003884}
   - {fileID: 757659230}
+  _players: []
+  _materials:
+  - {fileID: 2100000, guid: c1abb845085ac6f459fb54c744c9cbe7, type: 2}
+  - {fileID: 2100000, guid: 6c720274faea80f46bd0a7dc0df8b335, type: 2}
+  - {fileID: 2100000, guid: b6f81ef11e08f1d4bb916272886bae72, type: 2}
+  - {fileID: 2100000, guid: 114b9604c04eb674b8ee890293523b5f, type: 2}
   _roomManager: {fileID: 0}
 --- !u!1 &2126433682
 GameObject:
