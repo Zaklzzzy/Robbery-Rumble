@@ -1,13 +1,19 @@
 using Mirror;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
 {
-    [Header("UI")]
+    [Header("Color UI")]
     [SerializeField] private GameObject _panel;
     [SerializeField] private Image _buttonImage;
+
+    [Header("Edit Name UI")]
+    [SerializeField] private GameObject _nameText;
+    [SerializeField] private GameObject _inputName;
+    [SerializeField] private Button _editButton;
 
     [Header("Player")]
     [SerializeField] private Material _playerMaterial;
@@ -17,7 +23,7 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
     [SerializeField] private GameObject _pointer;
     private Texture2D _colorTexture;
 
-    [Header("Color Sync")]
+    [Header("Sync")]
     [SerializeField] private LobbyManager _lobbyManager;
     [SerializeField] private int _slotIndex;
 
@@ -27,6 +33,8 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
         _paletteImage.texture = _colorTexture;
         _playerMaterial.color = Color.white;
     }
+
+    #region Color
     public void OnPointerDown(PointerEventData eventData)
     {
         if (_panel.activeSelf) SelectColor(eventData);
@@ -79,7 +87,7 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
         return texture;
     }
 
-    public void UIActive(bool switcher)
+    public void ColorUIActive(bool switcher)
     {
         _panel.SetActive(switcher);
     }
@@ -88,4 +96,32 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
     {
         _lobbyManager._roomManager.roomSlots[_slotIndex].GetComponent<RoomPlayerUI>().CmdSetColor(ColorUtility.ToHtmlStringRGB(newColor));
     }
+
+    #endregion
+
+    #region Edit Name
+
+    public void EditNameUISwitcher()
+    {
+        bool switcher = _editButton.GetComponentInChildren<TextMeshProUGUI>().text == "Edit";
+
+        _nameText.SetActive(!switcher);
+        _inputName.SetActive(switcher);
+        if (switcher)
+        {
+            _editButton.GetComponentInChildren<TextMeshProUGUI>().text = "Apply";
+        }
+        else
+        {
+            _editButton.GetComponentInChildren<TextMeshProUGUI>().text = "Edit";
+            SwitchName();
+        }
+    }
+
+    private void SwitchName()
+    {
+        _lobbyManager._roomManager.roomSlots[_slotIndex].GetComponent<RoomPlayerUI>().CmdSetName(_inputName.GetComponent<TMP_InputField>().text);
+    }
+
+    #endregion
 }
