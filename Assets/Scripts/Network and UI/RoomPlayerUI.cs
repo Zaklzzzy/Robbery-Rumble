@@ -46,6 +46,6 @@ public class RoomPlayerUI : NetworkBehaviour
     [Command]
     public void CmdSetColor(string newColor)
     {
-        color = newColor;
+        color = "#"+newColor;
     }
 }

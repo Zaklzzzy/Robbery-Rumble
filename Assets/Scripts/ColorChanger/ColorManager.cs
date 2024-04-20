@@ -9,6 +9,7 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
     [Header("Color UI")]
     [SerializeField] private GameObject _panel;
     [SerializeField] private Image _buttonImage;
+    [SerializeField] private TMP_InputField _inputHEX;
 
     [Header("Edit Name UI")]
     [SerializeField] private GameObject _nameText;
@@ -45,6 +46,7 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
         if(_panel.activeSelf) SelectColor(eventData);
     }
 
+    //Pointer Color Switch Method
     private void SelectColor(PointerEventData eventData)
     {
         Vector2 localPoint;
@@ -59,15 +61,30 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
             int texY = Mathf.RoundToInt(y * (_colorTexture.height - 1));
 
             Color selectedColor = _colorTexture.GetPixel(texX, texY);
-            _buttonImage.color = selectedColor;
-            _playerMaterial.color = selectedColor;
-            SyncColorChange(selectedColor);
+            ColorChange(selectedColor);
         }
     }
 
-    public void TogglePalette()
+    //HEX Color Switch Method
+    public void HEXColorSwitch()
     {
-        _paletteImage.gameObject.SetActive(!_paletteImage.gameObject.activeSelf);
+        var newcolor = ColorUtility.TryParseHtmlString("#"+_inputHEX.text, out Color color);
+        if (newcolor)
+        {
+            Debug.Log("Try Parse");
+            ColorChange(color); 
+        }
+        else
+        {
+            Debug.Log("Error");
+        }
+    }
+    
+    private void ColorChange(Color newColor)
+    {
+        _buttonImage.color = newColor;
+        _playerMaterial.color = newColor;
+        _lobbyManager._roomManager.roomSlots[_slotIndex].GetComponent<RoomPlayerUI>().CmdSetColor(ColorUtility.ToHtmlStringRGB(newColor));
     }
 
     private Texture2D GenerateColorTexture(int width, int height)
@@ -92,10 +109,7 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
         _panel.SetActive(switcher);
     }
 
-    private void SyncColorChange(Color newColor)
-    {
-        _lobbyManager._roomManager.roomSlots[_slotIndex].GetComponent<RoomPlayerUI>().CmdSetColor(ColorUtility.ToHtmlStringRGB(newColor));
-    }
+    
 
     #endregion
 
