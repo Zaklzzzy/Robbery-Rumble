@@ -17,7 +17,7 @@ public class PlayerList : MonoBehaviour
         for (int i = 0; i < _roomManager.roomSlots.Count; i++)
         {
             _playersUI[i].SetActive(true);
-            //_players[i].GetComponentInChildren<TextMeshProUGUI>().color = ParseColor(_roomManager.roomSlots[i].GetComponent<RoomPlayerUI>().color);
+            _playersUI[i].GetComponentInChildren<TextMeshProUGUI>().color = ParseColor(_roomManager.roomSlots[i].GetComponent<RoomPlayerUI>().color);
             _playersUI[i].GetComponentInChildren<TextMeshProUGUI>().text = _roomManager.roomSlots[i].GetComponent<RoomPlayerUI>().playerName;
         }
     }

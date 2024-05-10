@@ -38,8 +38,14 @@ public class RoomPlayerUI : NetworkBehaviour
     }
 
     [Command]
+    public void CmdSetName(string newName)
+    {
+        playerName = newName;
+    }
+
+    [Command]
     public void CmdSetColor(string newColor)
     {
-        color = newColor;
+        color = "#"+newColor;
     }
 }
