@@ -9,9 +9,9 @@ public class SoundSetting : MonoBehaviour
 
     private void Start()
     {
-/*        float currentVolume;
+        float currentVolume;
         _audioMixer.GetFloat(_name,out currentVolume);
-        gameObject.GetComponent<Slider>().value = currentVolume;*/
+        gameObject.GetComponent<Slider>().value = currentVolume;
     }
 
     public void SetVolume(float volume)

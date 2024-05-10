@@ -107,7 +107,7 @@ public class ItemPick : NetworkBehaviour
     {
         if (_isHandEmpty)
         {
-            Debug.Log("Grab " + netId);
+            Debug.Log("Grab | Player Net ID: " + netId);
             _isHandEmpty = false;
             SetIKControl(true);
 
@@ -119,6 +119,8 @@ public class ItemPick : NetworkBehaviour
 
             _rb = _currentObject.GetComponent<Rigidbody>();
             Destroy(_rb);
+
+            //_currentObject.GetComponent<Dragable>().required = _isHandEmpty;
         }
     }
 
@@ -127,12 +129,14 @@ public class ItemPick : NetworkBehaviour
     {
         if (!_isHandEmpty)
         {
-            Debug.Log("Put " + netId);
+            Debug.Log("Put | Player Net ID: " + netId);
             _isHandEmpty = true;
             SetIKControl(false);
 
             _currentObject.transform.parent = null;
             _rb = _currentObject.AddComponent<Rigidbody>();
+
+            //_currentObject.GetComponent<Dragable>().required = _isHandEmpty;
         }
     }
 }
