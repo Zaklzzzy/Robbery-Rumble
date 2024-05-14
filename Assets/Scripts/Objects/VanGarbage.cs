@@ -1,5 +1,6 @@
 using Mirror;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class VanGarbage : NetworkBehaviour
 
     private void Start()
     {
-        _maxCount = FindObjectsByType<Dragable>(FindObjectsSortMode.None).Length;
+        _maxCount = FindObjectsByType<Dragable>(FindObjectsSortMode.None).Where(obj => obj.required == true).ToArray().Length;
         ChangeText();
     }
 
