@@ -750,6 +750,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   _jointHolder: {fileID: 2384413866470189309}
+  _currentObject: {fileID: 0}
 --- !u!65 &5177764984414400538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -769,8 +770,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.045927, y: 4.5037274, z: 2.1838553}
-  m_Center: {x: -0.12288356, y: 3.0537984, z: 2.0034485}
+  m_Size: {x: 2.045927, y: 4.5037274, z: 2.804801}
+  m_Center: {x: -0.12288356, y: 3.0537984, z: 2.3139215}
 --- !u!1 &3405337176327757738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,8 +1040,8 @@ GameObject:
   - component: {fileID: 3061718850531250463}
   - component: {fileID: 7301553936765995012}
   - component: {fileID: 6082382109868871685}
-  - component: {fileID: 6541970659245242522}
-  - component: {fileID: 5992710005017841469}
+  - component: {fileID: 1040537274426894443}
+  - component: {fileID: 7742481428283538815}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1247,7 +1248,7 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &6541970659245242522
+--- !u!114 &1040537274426894443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1256,7 +1257,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5761903369522699533}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -1277,12 +1278,11 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
---- !u!114 &5992710005017841469
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!114 &7742481428283538815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5761903369522699533}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b20dc110904e47f8a154cdcf6433eae, type: 3}
+  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -1312,11 +1312,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &5873284683068458709
 GameObject:
   m_ObjectHideFlags: 0

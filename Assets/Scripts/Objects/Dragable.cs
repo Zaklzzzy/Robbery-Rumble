@@ -3,7 +3,7 @@ using UnityEngine;
 
 //[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NetworkIdentity))]
-[RequireComponent(typeof(NetworkTransformUnreliable))]
+[RequireComponent(typeof(NetworkTransformReliable))]
 public class Dragable : NetworkBehaviour
 {
     [Header("Grab Points")]

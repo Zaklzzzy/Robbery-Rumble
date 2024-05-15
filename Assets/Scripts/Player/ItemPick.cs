@@ -9,7 +9,7 @@ public class ItemPick : NetworkBehaviour
     //[SerializeField] private GameObject _putUI;
     
     //Dragable Object
-    private GameObject _currentObject;
+    public GameObject _currentObject;
     private Transform _currentObjLeft; //Left Object Point
     private Transform _currentObjRight; //Right Object Point
 
@@ -27,12 +27,12 @@ public class ItemPick : NetworkBehaviour
         _ikcontrol = GetComponent<IKControl>();
     }
 
-    private void OnTriggerEnter(Collider other)
+/*    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Dragable"))
         {
             _currentObject = other.gameObject;
-            /*if (_isHandEmpty)
+            if (_isHandEmpty)
             {
                 _grabUI.SetActive(true);
                 _putUI.SetActive(false);
@@ -41,7 +41,14 @@ public class ItemPick : NetworkBehaviour
             {
                 _grabUI.SetActive(false);
                 _putUI.SetActive(true);
-            }*/
+            }
+        }
+    }*/
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Dragable"))
+        {
+            _currentObject = other.gameObject;
         }
     }
 
@@ -118,7 +125,10 @@ public class ItemPick : NetworkBehaviour
             _currentObject.transform.rotation = _jointHolder.transform.rotation;
 
             _rb = _currentObject.GetComponent<Rigidbody>();
-            Destroy(_rb);
+            if (_rb != null)
+            {
+                Destroy(_rb);
+            }
 
             //_currentObject.GetComponent<Dragable>().required = _isHandEmpty;
         }
@@ -134,7 +144,11 @@ public class ItemPick : NetworkBehaviour
             SetIKControl(false);
 
             _currentObject.transform.parent = null;
-            _rb = _currentObject.AddComponent<Rigidbody>();
+
+            if (_currentObject.GetComponent<Rigidbody>() == null)
+            {
+                _rb = _currentObject.AddComponent<Rigidbody>();
+            }
 
             //_currentObject.GetComponent<Dragable>().required = _isHandEmpty;
         }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6165380679772893504}
   - component: {fileID: 1836120256011118849}
   - component: {fileID: 2593328238382898692}
-  - component: {fileID: 4328762066927001997}
+  - component: {fileID: 1412572148279769845}
   m_Layer: 0
   m_Name: Window_5
   m_TagString: Untagged
@@ -136,7 +136,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4328762066927001997
+--- !u!114 &1412572148279769845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 56598718606815192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -166,11 +166,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &889723704495833087
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +183,7 @@ GameObject:
   - component: {fileID: 1337527339635371182}
   - component: {fileID: 8708966561099184305}
   - component: {fileID: 1666853263720409056}
-  - component: {fileID: 7103498561952662085}
+  - component: {fileID: 3977351433018416258}
   m_Layer: 0
   m_Name: Window_9
   m_TagString: Untagged
@@ -307,7 +306,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7103498561952662085
+--- !u!114 &3977351433018416258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,7 +315,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 889723704495833087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -337,11 +336,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &2840742968148839083
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +353,7 @@ GameObject:
   - component: {fileID: 786064097856677040}
   - component: {fileID: 3105668328059727608}
   - component: {fileID: 270347906742667729}
-  - component: {fileID: 3913884288275661358}
+  - component: {fileID: 8208381130104230098}
   m_Layer: 0
   m_Name: Window_4
   m_TagString: Untagged
@@ -478,7 +476,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3913884288275661358
+--- !u!114 &8208381130104230098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -487,7 +485,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2840742968148839083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -508,11 +506,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &3115135042367000392
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +523,7 @@ GameObject:
   - component: {fileID: 7362303787247619963}
   - component: {fileID: 7750220719034200342}
   - component: {fileID: 9191547925615901502}
-  - component: {fileID: 1916833579742229171}
+  - component: {fileID: 3589880600575144138}
   m_Layer: 0
   m_Name: Window_8
   m_TagString: Untagged
@@ -649,7 +646,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1916833579742229171
+--- !u!114 &3589880600575144138
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -658,7 +655,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3115135042367000392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -679,11 +676,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &3117131935615974853
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +693,7 @@ GameObject:
   - component: {fileID: 6628005652165442179}
   - component: {fileID: 371314651308273955}
   - component: {fileID: 4835557689149239003}
-  - component: {fileID: 2118846494923003721}
+  - component: {fileID: 110032133796916919}
   m_Layer: 0
   m_Name: Window_11
   m_TagString: Untagged
@@ -820,7 +816,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2118846494923003721
+--- !u!114 &110032133796916919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -829,7 +825,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3117131935615974853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -850,11 +846,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &3443811645890384793
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,7 +863,7 @@ GameObject:
   - component: {fileID: 2679229763674461395}
   - component: {fileID: 5795662018227410026}
   - component: {fileID: 5412986729577431484}
-  - component: {fileID: 8207972454844801133}
+  - component: {fileID: 1074018454323675469}
   m_Layer: 0
   m_Name: Window_2
   m_TagString: Untagged
@@ -991,7 +986,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8207972454844801133
+--- !u!114 &1074018454323675469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1000,7 +995,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3443811645890384793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -1021,11 +1016,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &3628647741311387022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1033,7 @@ GameObject:
   - component: {fileID: 8380610225733675170}
   - component: {fileID: 5747980168095184680}
   - component: {fileID: 2657011047200894201}
-  - component: {fileID: 355792873147542152}
+  - component: {fileID: 8462391963151633289}
   m_Layer: 0
   m_Name: Window_10
   m_TagString: Untagged
@@ -1162,7 +1156,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &355792873147542152
+--- !u!114 &8462391963151633289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1171,7 +1165,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3628647741311387022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -1192,11 +1186,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &4103610014220216145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,7 +1203,7 @@ GameObject:
   - component: {fileID: 7114787054382513826}
   - component: {fileID: 4990570952197913647}
   - component: {fileID: 320508532631085965}
-  - component: {fileID: 286671383320718625}
+  - component: {fileID: 7001782634565701175}
   m_Layer: 0
   m_Name: Window_6
   m_TagString: Untagged
@@ -1333,7 +1326,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &286671383320718625
+--- !u!114 &7001782634565701175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1342,7 +1335,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4103610014220216145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -1363,11 +1356,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &4914315341088544787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,7 +1373,7 @@ GameObject:
   - component: {fileID: 3211924473260388571}
   - component: {fileID: 8108366409811077016}
   - component: {fileID: 1853810835032044453}
-  - component: {fileID: 6214314679384154437}
+  - component: {fileID: 6579963595086573420}
   m_Layer: 0
   m_Name: Window_7
   m_TagString: Untagged
@@ -1504,7 +1496,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6214314679384154437
+--- !u!114 &6579963595086573420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1513,7 +1505,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4914315341088544787}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -1534,11 +1526,10 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!1 &5050634733870907333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1602,7 @@ GameObject:
   - component: {fileID: 2656055206655188355}
   - component: {fileID: 2185249561940005463}
   - component: {fileID: 5240856226486513705}
-  - component: {fileID: 984503798293893966}
+  - component: {fileID: 5006237253970594707}
   m_Layer: 0
   m_Name: Window_3
   m_TagString: Untagged
@@ -1734,7 +1725,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &984503798293893966
+--- !u!114 &5006237253970594707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1743,7 +1734,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8398749251928333133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 1
@@ -1764,8 +1755,7 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  changedDetection: 1
-  positionSensitivity: 0.01
+  onlySyncOnChangeCorrectionMultiplier: 2
   rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
