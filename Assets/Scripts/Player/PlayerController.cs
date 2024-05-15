@@ -19,7 +19,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _groundCheckDistance = 0.2f;
     [SerializeField] private float _gravityMultiplier = 2.5f;
-    private bool _isGrounded = false;
+    [SyncVar] public bool _isGrounded = false;
 
     //New Input System
     private GameInput _gameInput;
@@ -120,14 +120,20 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    //Mirror Scripts
+    // Mirror Scripts
     [Command]
     public void CmdJump()
     {
         if (_isGrounded)
         {
-            _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
-            _isGrounded = false;
+            RpcJump();
         }
+    }
+
+    [ClientRpc]
+    private void RpcJump()
+    {
+        _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
+        _isGrounded = false;
     }
 }
