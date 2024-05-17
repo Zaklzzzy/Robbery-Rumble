@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -12,10 +13,15 @@ public class VanGarbage : NetworkBehaviour
 
     private HashSet<GameObject> objectsInTrigger = new HashSet<GameObject>();
 
+    public NetworkRoomManager _roomManager;
+    private bool sceneChanging = false;
+
     private void Start()
     {
         _maxCount = FindObjectsByType<Dragable>(FindObjectsSortMode.None).Where(obj => obj.required == true).ToArray().Length;
         ChangeText();
+
+        _roomManager = FindAnyObjectByType<NetworkRoomManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +32,12 @@ public class VanGarbage : NetworkBehaviour
             {
                 _count++;
                 ChangeText();
+
+                if (_count == _maxCount && !sceneChanging)
+                {
+                    sceneChanging = true;
+                    StartCoroutine(ChangeSceneAfterDelay());
+                }
             }
         }
     }
@@ -45,5 +57,27 @@ public class VanGarbage : NetworkBehaviour
     private void ChangeText()
     {
         _countText.text = "Objects: " + _count + "/" + _maxCount;
+    }
+
+    [Server]
+    private IEnumerator ChangeSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+
+        // All clients ready check
+        foreach (var conn in NetworkServer.connections.Values)
+        {
+            if (!conn.isReady)
+            {
+                conn.Send(new NetworkPingMessage());
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        // Change scene if his no changing now
+        if (sceneChanging)
+        {
+            _roomManager.ServerChangeScene(_roomManager.RoomScene);
+        }
     }
 }
