@@ -127,7 +127,7 @@ public class ItemPick : NetworkBehaviour
             _rb = _currentObject.GetComponent<Rigidbody>();
             if (_rb != null)
             {
-                Destroy(_rb);
+                _rb.isKinematic = true;
             }
 
             //_currentObject.GetComponent<Dragable>().required = _isHandEmpty;
@@ -145,12 +145,13 @@ public class ItemPick : NetworkBehaviour
 
             _currentObject.transform.parent = null;
 
-            if (_currentObject.GetComponent<Rigidbody>() == null)
+            if (_rb != null)
             {
-                _rb = _currentObject.AddComponent<Rigidbody>();
+                _rb.isKinematic = false;
+                _rb = null; // Reset Rigidbody reference
             }
 
-            //_currentObject.GetComponent<Dragable>().required = _isHandEmpty;
+            _currentObject = null;
         }
     }
 }
