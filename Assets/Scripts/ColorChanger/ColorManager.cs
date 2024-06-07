@@ -117,17 +117,17 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
 
     public void EditNameUISwitcher()
     {
-        bool switcher = _editButton.GetComponentInChildren<TextMeshProUGUI>().text == "Edit";
+        bool switcher = true;
 
         _nameText.SetActive(!switcher);
         _inputName.SetActive(switcher);
         if (switcher)
         {
-            _editButton.GetComponentInChildren<TextMeshProUGUI>().text = "Apply";
+            //swap image
         }
         else
         {
-            _editButton.GetComponentInChildren<TextMeshProUGUI>().text = "Edit";
+            //swap image
             SwitchName();
         }
     }
