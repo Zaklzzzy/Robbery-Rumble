@@ -64,7 +64,6 @@ public class VanGarbage : NetworkBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        // All clients ready check
         foreach (var conn in NetworkServer.connections.Values)
         {
             if (!conn.isReady)
@@ -74,10 +73,9 @@ public class VanGarbage : NetworkBehaviour
             }
         }
 
-        // Change scene if his no changing now
         if (sceneChanging)
         {
-            _roomManager.ServerChangeScene(_roomManager.RoomScene);
+            _roomManager.ServerChangeScene("StartMenu");
         }
     }
 }
