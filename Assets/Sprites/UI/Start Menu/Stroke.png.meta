@@ -113,12 +113,12 @@ TextureImporter:
       name: Stroke_0
       rect:
         serializedVersion: 2
-        x: 528
+        x: 525
         y: 283
-        width: 851
+        width: 849
         height: 70
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
