@@ -15,6 +15,7 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
     [SerializeField] private GameObject _nameText;
     [SerializeField] private GameObject _inputName;
     [SerializeField] private Button _editButton;
+    private bool switcher = true;
 
     [Header("Player")]
     [SerializeField] private Material _playerMaterial;
@@ -117,8 +118,6 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
 
     public void EditNameUISwitcher()
     {
-        bool switcher = true;
-
         _nameText.SetActive(!switcher);
         _inputName.SetActive(switcher);
         if (switcher)
@@ -130,6 +129,8 @@ public class ColorManager : NetworkBehaviour, IPointerDownHandler, IDragHandler
             //swap image
             SwitchName();
         }
+
+        switcher = !switcher;
     }
 
     private void SwitchName()
