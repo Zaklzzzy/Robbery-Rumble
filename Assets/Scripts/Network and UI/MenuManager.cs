@@ -95,6 +95,12 @@ public class MenuManager : MonoBehaviour
         menuUI.SetActive(!switcher);
     }
 
+    // Выход из игры
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     // Остановка сервера при выходе
     private void OnDestroy()
     {

@@ -1335,8 +1335,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 818458915}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: SettingUI
-        m_Mode: 6
+        m_MethodName: QuitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10548,7 +10548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1319486944
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16908,6 +16908,50 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!23 &1693791580159562434
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012397454467394914}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 4079362192135711221, guid: 20f2a6a286fcea745811e639169fa660, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1746225572420005118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16925,6 +16969,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &2012397454467394914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4752096506386338860}
+  - component: {fileID: 5058592374980931119}
+  - component: {fileID: 1693791580159562434}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!33 &4382893619034788671
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16933,6 +16995,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9032258729503501131}
   m_Mesh: {fileID: -5495902117074765545, guid: a1e4593abb9fdc04dbe15ba19ccccea6, type: 3}
+--- !u!4 &4752096506386338860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012397454467394914}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.54180336, y: -0.3837844, z: -0.5931084, w: 0.45539126}
+  m_LocalPosition: {x: 450, y: -76.5, z: 81}
+  m_LocalScale: {x: 38374.875, y: 13789.24, z: 30608.648}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 2.19, y: -83.2, z: -106.91}
 --- !u!4 &4985057175584400801
 Transform:
   m_ObjectHideFlags: 0
@@ -16948,6 +17025,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 2.345, y: -82.605, z: -47.922}
+--- !u!33 &5058592374980931119
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012397454467394914}
+  m_Mesh: {fileID: -462981019419857548, guid: 20f2a6a286fcea745811e639169fa660, type: 3}
 --- !u!23 &5320201886492086240
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17127,6 +17212,7 @@ SceneRoots:
   - {fileID: 6791544200411842322}
   - {fileID: 818458914}
   - {fileID: 1319486947}
+  - {fileID: 4752096506386338860}
   - {fileID: 4985057175584400801}
   - {fileID: 313370449}
   - {fileID: 1358649188}
