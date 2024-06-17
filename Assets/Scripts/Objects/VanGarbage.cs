@@ -7,13 +7,11 @@ using UnityEngine;
 
 public class VanGarbage : NetworkBehaviour
 {
-    [Header("Counter")]
     [SerializeField] private TextMeshProUGUI _countText;
-    [SerializeField] private int _maxCount;
-    private int _count;
-    [Header("Timer")]
     [SerializeField] private TextMeshProUGUI _timerText;
-    [SerializeField] private float _gameDuration = 300f;
+    [SerializeField] private int _maxCount;
+    [SerializeField] private float _gameDuration = 300f; // Game Time
+    private int _count;
     private float _timeRemaining;
     private bool _isGameOver = false;
 
@@ -27,18 +25,18 @@ public class VanGarbage : NetworkBehaviour
         if (isServer)
         {
             SetRandomRequiredObjects();
-            RpcSetRandomRequiredObjects();
         }
 
         _maxCount = FindObjectsByType<Dragable>(FindObjectsSortMode.None).Where(obj => obj.required == true).ToArray().Length;
         ChangeText();
-
         _roomManager = FindAnyObjectByType<NetworkRoomManager>();
 
+        // Init timer
         _timeRemaining = _gameDuration;
         StartCoroutine(GameTimer());
     }
 
+    [Server]
     private void SetRandomRequiredObjects()
     {
         // Find all Dragable objects
@@ -53,15 +51,20 @@ public class VanGarbage : NetworkBehaviour
         {
             allDragableObjects[i].required = true;
             EnableOutline(allDragableObjects[i].gameObject);
+            RpcSetRequired(allDragableObjects[i].gameObject, true);
         }
     }
 
     [ClientRpc]
-    private void RpcSetRandomRequiredObjects()
+    private void RpcSetRequired(GameObject obj, bool isRequired)
     {
-        if (!isServer)
+        if (obj.TryGetComponent(out Dragable dragable))
         {
-            SetRandomRequiredObjects();
+            dragable.required = isRequired;
+            if (isRequired)
+            {
+                EnableOutline(obj);
+            }
         }
     }
 
@@ -73,6 +76,7 @@ public class VanGarbage : NetworkBehaviour
             {
                 _count++;
                 ChangeText();
+                RpcChangeText(_count);
 
                 if (_count == _maxCount && !sceneChanging)
                 {
@@ -91,17 +95,20 @@ public class VanGarbage : NetworkBehaviour
             {
                 _count--;
                 ChangeText();
+                RpcChangeText(_count);
             }
         }
     }
+
     private void ChangeText()
     {
         _countText.text = "Objects: " + _count + "/" + _maxCount;
     }
 
     [ClientRpc]
-    private void RpcChangeText()
+    private void RpcChangeText(int count)
     {
+        _count = count;
         ChangeText();
     }
 
@@ -133,13 +140,13 @@ public class VanGarbage : NetworkBehaviour
             yield return new WaitForSeconds(1f);
             _timeRemaining--;
 
-            // Обновление UI таймера
+            // Update Timer UI
             RpcUpdateTimerText(_timeRemaining);
 
             if (_timeRemaining <= 0)
             {
                 _isGameOver = true;
-                StartCoroutine(ChangeSceneAfterDelay());
+                _roomManager.ServerChangeScene("StartMenu");
             }
         }
     }

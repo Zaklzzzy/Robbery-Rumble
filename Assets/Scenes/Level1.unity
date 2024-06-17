@@ -3107,8 +3107,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   _countText: {fileID: 3573670331750150876}
-  _maxCount: 0
   _timerText: {fileID: 1153378590}
+  _maxCount: 0
   _gameDuration: 300
   _roomManager: {fileID: 0}
 --- !u!1 &1229431861
@@ -6971,7 +6971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!33 &1594274198222549266
 MeshFilter:
   m_ObjectHideFlags: 0
