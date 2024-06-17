@@ -1,12 +1,13 @@
 using Mirror;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ItemPick : NetworkBehaviour
 {
     [SerializeField] private GameObject _jointHolder;
-    //[SerializeField] private GameObject _grabUI;
-    //[SerializeField] private GameObject _putUI;
+    [SerializeField] private GameObject _KeyUI;
+    [SerializeField] private TextMeshProUGUI _KeyText;
     
     //Dragable Object
     public GameObject _currentObject;
@@ -25,30 +26,49 @@ public class ItemPick : NetworkBehaviour
     private void Start()
     {
         _ikcontrol = GetComponent<IKControl>();
+
+        _KeyUI = GameObject.FindGameObjectWithTag("KeyUI");
+        if (_KeyUI != null)
+        {
+            _KeyText = _KeyUI.GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        _KeyUI.SetActive(false);
     }
 
-/*    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Dragable"))
+    /*    private void OnTriggerEnter(Collider other)
         {
-            _currentObject = other.gameObject;
-            if (_isHandEmpty)
+            if (other.gameObject.CompareTag("Dragable"))
             {
-                _grabUI.SetActive(true);
-                _putUI.SetActive(false);
+                _currentObject = other.gameObject;
+                if (_isHandEmpty)
+                {
+                    _grabUI.SetActive(true);
+                    _putUI.SetActive(false);
+                }
+                else if (!_isHandEmpty)
+                {
+                    _grabUI.SetActive(false);
+                    _putUI.SetActive(true);
+                }
             }
-            else if (!_isHandEmpty)
-            {
-                _grabUI.SetActive(false);
-                _putUI.SetActive(true);
-            }
-        }
-    }*/
+        }*/
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Dragable"))
         {
             _currentObject = other.gameObject;
+
+            if (_isHandEmpty)
+            {
+                _KeyUI.SetActive(true);
+                _KeyText.text = "Pick Up";
+            }
+            else if (!_isHandEmpty)
+            {
+                _KeyUI.SetActive(true);
+                _KeyText.text = "Drop";
+            }
         }
     }
 
@@ -74,8 +94,7 @@ public class ItemPick : NetworkBehaviour
         if (other.gameObject.CompareTag("Dragable") && _isHandEmpty)
         {
             _currentObject = null;
-            //_grabUI.SetActive(false);
-            //_putUI.SetActive(false);
+            _KeyUI.SetActive(false);
         }
     }
 

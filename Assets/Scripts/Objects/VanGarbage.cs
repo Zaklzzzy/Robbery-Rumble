@@ -4,19 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class VanGarbage : NetworkBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _countText;
-    [SerializeField] private TextMeshProUGUI _timerText;
+    [Header("Objects Count")]
+    [SerializeField] private TextMeshProUGUI _countTextNow;
+    [SerializeField] private TextMeshProUGUI _countTextMax;
     [SerializeField] private int _maxCount;
-    [SerializeField] private float _gameDuration = 300f; // Game Time
+    [Header("Timer")]
+    [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private float _gameDuration = 120f; // Game Time
+    [Header("Audio")]
+    [SerializeField] private AudioSourceCreator _audioSourceHandler;
+    [SerializeField] private AudioResource _winMusic;
+
     private int _count;
     private float _timeRemaining;
     private bool _isGameOver = false;
 
     private HashSet<GameObject> objectsInTrigger = new HashSet<GameObject>();
 
+    [Header("Network")]
     public NetworkRoomManager _roomManager;
     private bool sceneChanging = false;
 
@@ -36,6 +45,13 @@ public class VanGarbage : NetworkBehaviour
         StartCoroutine(GameTimer());
     }
 
+    private void Update()
+    {
+        _maxCount = FindObjectsByType<Dragable>(FindObjectsSortMode.None).Where(obj => obj.required == true).ToArray().Length;
+
+        EnableOutlineForRequiredObjects();
+    }
+
     [Server]
     private void SetRandomRequiredObjects()
     {
@@ -51,20 +67,6 @@ public class VanGarbage : NetworkBehaviour
         {
             allDragableObjects[i].required = true;
             EnableOutline(allDragableObjects[i].gameObject);
-            RpcSetRequired(allDragableObjects[i].gameObject, true);
-        }
-    }
-
-    [ClientRpc]
-    private void RpcSetRequired(GameObject obj, bool isRequired)
-    {
-        if (obj.TryGetComponent(out Dragable dragable))
-        {
-            dragable.required = isRequired;
-            if (isRequired)
-            {
-                EnableOutline(obj);
-            }
         }
     }
 
@@ -76,10 +78,10 @@ public class VanGarbage : NetworkBehaviour
             {
                 _count++;
                 ChangeText();
-                RpcChangeText(_count);
 
                 if (_count == _maxCount && !sceneChanging)
                 {
+                    _audioSourceHandler.CreateAudioSource(_winMusic);
                     sceneChanging = true;
                     StartCoroutine(ChangeSceneAfterDelay());
                 }
@@ -95,34 +97,27 @@ public class VanGarbage : NetworkBehaviour
             {
                 _count--;
                 ChangeText();
-                RpcChangeText(_count);
             }
         }
     }
 
     private void ChangeText()
     {
-        _countText.text = "Objects: " + _count + "/" + _maxCount;
-    }
-
-    [ClientRpc]
-    private void RpcChangeText(int count)
-    {
-        _count = count;
-        ChangeText();
+        _countTextNow.text = _count.ToString();
+        _countTextMax.text =  _maxCount.ToString();
     }
 
     [Server]
     private IEnumerator ChangeSceneAfterDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5f);
 
         foreach (var conn in NetworkServer.connections.Values)
         {
             if (!conn.isReady)
             {
                 conn.Send(new NetworkPingMessage());
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(5f);
             }
         }
 
@@ -165,6 +160,14 @@ public class VanGarbage : NetworkBehaviour
         if (outline != null)
         {
             outline.enabled = true;
+        }
+    }
+    private void EnableOutlineForRequiredObjects()
+    {
+        var requiredObjects = FindObjectsByType<Dragable>(FindObjectsSortMode.None).Where(obj => obj.required == true);
+        foreach (var obj in requiredObjects)
+        {
+            EnableOutline(obj.gameObject);
         }
     }
 }
